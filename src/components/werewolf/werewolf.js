@@ -1,5 +1,5 @@
 // werewolf.js
-
+//TODO: not use?
 import React, { Component } from 'react';
 
 class Werewolf extends Component {

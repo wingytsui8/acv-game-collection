@@ -1,4 +1,19 @@
-// constant.js
+// werewolf.js
+export const roleWerewolf = "werewolf";
+export const roleSeer= "seer";
+export const roleGuard= "guard";
+export const roleHunter = "hunter";
+export const roleWitch= "witch";
+export const roleVillager = "villager";
+export const roleFool = "fool";
+
+export const statusPending = "pending";
+export const statusNight= "night";
+export const statusWitch= "witch";
+export const statusDiscussion = "dicussion";
+export const statusVoting= "voting";
+export const statusEnd = "end";
+
 
 export const roles = {
   werewolf: {

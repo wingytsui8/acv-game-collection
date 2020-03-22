@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import * as  ROUTES from './constants/routes';
 import WerewolfRole from './components/werewolf/role';
 import WerewolfRule from './components/werewolf/rule';
 import WerewolfRoom from './components/werewolf/room';
 import Notfound from './components/notfound'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import * as serviceWorker from './serviceWorker';
 
@@ -14,7 +16,7 @@ import { Route, NavLink, BrowserRouter as Router, Switch } from 'react-router-do
 
 const routing = (
     <Router>
-        <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
+        {/* <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
             <div class="container-fluid">
                 <ul class="nav navbar-nav" >
                     <li class="nav-item p-2">
@@ -28,13 +30,14 @@ const routing = (
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav> */}
 
         <Switch>
+            <Route exact path={ROUTES.HOME} component={App} />
             <Route exact path="/" component={App} />
-            <Route path="/werewolf/rule" component={WerewolfRule} />
-            <Route path="/werewolf/role" component={WerewolfRole} />
-            <Route path="/werewolf/room/:id" component={WerewolfRoom} />
+            {/* <Route path="/werewolf/rule" component={WerewolfRule} />
+            <Route path="/werewolf/role" component={WerewolfRole} /> */}
+            <Route path={ROUTES.WEREWOLF_ROOM} component={WerewolfRoom} />
             <Route component={Notfound} />
         </Switch>
     </Router>

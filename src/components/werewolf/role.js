@@ -1,7 +1,7 @@
 // role.js
 
 import React, { Component } from 'react';
-import * as constants from './constant';
+import * as constants from '../../constants/werewolf';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class WerewolfRole extends Component {

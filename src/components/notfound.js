@@ -8,6 +8,7 @@ class Notfound extends Component {
     return (
       <div class="App">
         <h1>Page Not Found</h1>
+        <p>Return to <a  href="/">Home</a> Page</p>
       </div>
     );
   }
