@@ -5,7 +5,7 @@ import App from './App';
 import * as  ROUTE from './constants/route';
 import WerewolfRole from './components/werewolf/roleDescription';
 import WerewolfRule from './components/werewolf/rule';
-import WerewolfRoom from './components/werewolf/room';
+import WerewolfRoom from './components/werewolf/Room';
 import Notfound from './components/notfound'
 import 'bootstrap/dist/css/bootstrap.min.css';
 

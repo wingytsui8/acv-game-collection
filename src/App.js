@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import firebase from './components/firebase/firebase';
 import * as constants from './constants/game';
 import * as label from './constants/label';
