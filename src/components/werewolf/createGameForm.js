@@ -12,7 +12,7 @@ class WerewolfCreateGameForm extends Component {
       //roles
       werewolf: this.props.roles.werewolf,
       villager: this.props.roles.villager,
-      seer: this.props.roles.seer,
+      prophet: this.props.roles.prophet,
       guard: this.props.roles.guard,
       witch: this.props.roles.witch,
       hunter: this.props.roles.hunter,
@@ -37,7 +37,7 @@ class WerewolfCreateGameForm extends Component {
     6: {
       werewolf: 2,
       villager: 2,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 0,
       hunter: 0,
@@ -47,7 +47,7 @@ class WerewolfCreateGameForm extends Component {
     7: {
       werewolf: 2,
       villager: 3,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 0,
       hunter: 0,
@@ -57,7 +57,7 @@ class WerewolfCreateGameForm extends Component {
     8: {
       werewolf: 2,
       villager: 3,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 0,
@@ -67,7 +67,7 @@ class WerewolfCreateGameForm extends Component {
     9: {
       werewolf: 3,
       villager: 3,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 0,
@@ -77,7 +77,7 @@ class WerewolfCreateGameForm extends Component {
     10: {
       werewolf: 3,
       villager: 4,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 0,
@@ -86,7 +86,7 @@ class WerewolfCreateGameForm extends Component {
     11: {
       werewolf: 3,
       villager: 3,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -96,7 +96,7 @@ class WerewolfCreateGameForm extends Component {
     12: {
       werewolf: 4,
       villager: 4,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -106,7 +106,7 @@ class WerewolfCreateGameForm extends Component {
     13: {
       werewolf: 4,
       villager: 5,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -116,7 +116,7 @@ class WerewolfCreateGameForm extends Component {
     14: {
       werewolf: 4,
       villager: 5,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -126,7 +126,7 @@ class WerewolfCreateGameForm extends Component {
     15: {
       werewolf: 4,
       villager: 6,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -136,7 +136,7 @@ class WerewolfCreateGameForm extends Component {
     16: {
       werewolf: 4,
       villager: 7,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -146,7 +146,7 @@ class WerewolfCreateGameForm extends Component {
     17: {
       werewolf: 4,
       villager: 8,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -156,7 +156,7 @@ class WerewolfCreateGameForm extends Component {
     18: {
       werewolf: 4,
       villager: 9,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 1,
       hunter: 1,
@@ -191,7 +191,7 @@ class WerewolfCreateGameForm extends Component {
 
   // FIXME: there is time delay
   // calculateTotal() {
-  //   var total = parseInt(this.state.werewolf) + parseInt(this.state.villager) + parseInt(this.state.seer) + parseInt(this.state.guard) + parseInt(this.state.witch) + parseInt(this.state.hunter) + parseInt(this.state.fool)
+  //   var total = parseInt(this.state.werewolf) + parseInt(this.state.villager) + parseInt(this.state.prophet) + parseInt(this.state.guard) + parseInt(this.state.witch) + parseInt(this.state.hunter) + parseInt(this.state.fool)
   //   this.setState({ total: total });
   // }
 
@@ -211,8 +211,8 @@ class WerewolfCreateGameForm extends Component {
           <input class="col-2" type="number" name={constants.roleVillager} value={this.state.villager} onChange={this.handleChange} min={1}></input>
         </div>
         <div class="form-group row">
-          <label class="col-4" >{this.roles[constants.roleSeer]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleSeer} checked={this.state.seer} onChange={this.handleCheckboxChange} ></input>
+          <label class="col-4" >{this.roles[constants.roleProphet]['name']}</label>
+          <input class="col-2" type="checkbox" name={constants.roleProphet} checked={this.state.prophet} onChange={this.handleCheckboxChange} ></input>
           <label class="col-4" >{this.roles[constants.roleGuard]['name']}</label>
           <input class="col-2" type="checkbox" name={constants.roleGuard} checked={this.state.guard} onChange={this.handleCheckboxChange} ></input>
         </div>
@@ -232,15 +232,15 @@ class WerewolfCreateGameForm extends Component {
         </div>
         <div><h4>Duration of each session (s)</h4></div>
         <div class="form-group row">
-        <label class="col-4" >{constants.status.night.name}</label>
+        <label class="col-4" >{constants.phase.night.name}</label>
           <input class="col-2" type="number" name="nightDuration" value={this.state.nightDuration} onChange={this.handleChange}></input>
-        <label class="col-4" >{constants.status.witch.name}</label>
+        <label class="col-4" >{constants.phase.witch.name}</label>
           <input class="col-2" type="number" name="witchDuration" value={this.state.witchDuration} onChange={this.handleChange}></input>
         </div>
         <div class="form-group row">
-        <label class="col-4" >{constants.status.discussion.name}</label>
+        <label class="col-4" >{constants.phase.discussion.name}</label>
           <input class="col-2" type="number" name="discussionDuration" value={this.state.discussionDuration} onChange={this.handleChange}></input>
-        <label class="col-4" >{constants.status.voting.name}</label>
+        <label class="col-4" >{constants.phase.voting.name}</label>
           <input class="col-2" type="number" name="votingDuration" value={this.state.votingDuration} onChange={this.handleChange}></input>
         </div>
         <div><h4>Other Setting</h4></div>

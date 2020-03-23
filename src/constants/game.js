@@ -1,5 +1,5 @@
 // game.js
-export const initStatus = "pending";
+export const initPhase = "pending";
 
 export const games = {
   "werewolf": "狼人 Werewolf"
@@ -19,7 +19,7 @@ export const werewolf = {
     roles: {
       werewolf: 2,
       villager: 2,
-      seer: 1,
+      prophet: 1,
       guard: 1,
       witch: 0,
       hunter: 0,
@@ -28,35 +28,127 @@ export const werewolf = {
     },
     game: "werewolf",
     players: {
-      userId : {
-        id : "userId",
-        name : "User Name",
+         //MOCK: remove all players
+      999 : {
+        id : 999,
+        name : "9",
         role : "villager",
         isAlive : true,
         select : null,
         selectedBy : null,
         votes : 0,
+        confirmed : true,
+        action :{}
       },
-      93853851792 : {
-        id : 93853851792,
-        name : "Testing 1",
+      
+      111 : {
+        id : 111,
+        name : "1",
         role : "villager",
         isAlive : true,
         select : null,
         selectedBy : null,
         votes : 0,
+        confirmed : false,
+        action :{}
       },
-      1234567890 : {
-        id : 1234567890,
-        name : "Test 2",
+      222 : {
+        id : 222,
+        name : "2",
         role : "villager",
         isAlive : true,
         select : null,
         selectedBy : null,
         votes : 0,
+        confirmed : true,
+        action :{}
+      },
+
+      333 : {
+        id : 333,
+        name : "3",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
+      },
+      444 : {
+        id : 444,
+        name : "4",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
+      },
+
+      555 : {
+        id : 555,
+        name : "5",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
+      },
+      666 : {
+        id : 666,
+        name : "6",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
+      },
+
+      777 : {
+        id : 777,
+        name : "7",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
+      },
+      888 : {
+        id : 888,
+        name : "8",
+        role : "villager",
+        isAlive : true,
+        select : null,
+        selectedBy : null,
+        votes : 0,
+        confirmed : true,
+        action :{}
       },
     },
-    status: "pending"
+    spectators: {
+      //MOCK: remove all spectators
+      12345678 : {
+        id : 12345678,
+        name : "Testing 1",
+      },
+      987654321 : {
+        id : 987654321,
+        name : "Testing 2",
+      },
+      3456345 : {
+        id : 3456345,
+        name : "Testing 3",
+      }
+    },
+    phase: initPhase
   }
 }
 

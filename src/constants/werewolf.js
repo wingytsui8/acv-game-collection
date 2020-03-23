@@ -1,18 +1,18 @@
 // werewolf.js
 export const roleWerewolf = "werewolf";
-export const roleSeer= "seer";
+export const roleProphet= "prophet";
 export const roleGuard= "guard";
 export const roleHunter = "hunter";
 export const roleWitch= "witch";
 export const roleVillager = "villager";
 export const roleFool = "fool";
 
-export const statusPending = "pending";
-export const statusNight= "night";
-export const statusWitch= "witch";
-export const statusDiscussion = "dicussion";
-export const statusVoting= "voting";
-export const statusEnd = "end";
+export const phasePending = "pending";
+export const phaseNight= "night";
+export const phaseWitch= "witch";
+export const phaseDiscussion = "discussion";
+export const phaseVoting= "voting";
+export const phaseEnd = "end";
 
 
 export const roles = {
@@ -22,8 +22,8 @@ export const roles = {
     description_zh: '每回合「黑夜」可吞噬一人。狼人可以選擇不吞噬人（空刀）或是吞噬狼人（自刀）。如果狼人團隊無法統一擊殺目標，則無人死亡，形成平安夜。「白天」則可直接暴露身份強制進入黑夜（自爆），或者暴露身份強制帶走任意玩家（明刀）進入下一白天，若該玩家為獵人以外神明則無法發動技能（意即女巫不能投毒、預言家無法查驗）。',
     team: 'werewolf',
   },
-  seer: {
-    name: '預言家 Seer',
+  prophet: {
+    name: '預言家 prophet',
     description: 'Each night, they can discover the real identity of a player. They must help the other villagers but discretely to not be found by werewolves.',
     description_zh: '每回合「黑夜」可以查看一位玩家身份（好人或狼人，但查不到准确身份，比如说女巫、猎人等）。',
     team: 'villager',
@@ -75,7 +75,7 @@ export const teams = {
   }
 }
 
-export const status = {
+export const phase = {
   pending: {
     name: '等待玩家 Waiting for player',
     description: {
@@ -88,7 +88,7 @@ export const status = {
     name: '晚上 At night',
     description: {
       werewolf : '狼人開始殺害一個村民',
-      seer : '查看一位玩家的身份',
+      prophet : '查看一位玩家的身份',
       graud : '守衛一位玩家',
       others : '訓教 Go to sleep'
     },

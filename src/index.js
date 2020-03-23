@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as  ROUTES from './constants/routes';
-import WerewolfRole from './components/werewolf/role';
+import * as  ROUTE from './constants/route';
+import WerewolfRole from './components/werewolf/roleDescription';
 import WerewolfRule from './components/werewolf/rule';
 import WerewolfRoom from './components/werewolf/room';
 import Notfound from './components/notfound'
@@ -33,11 +33,11 @@ const routing = (
         </nav> */}
 
         <Switch>
-            <Route exact path={ROUTES.HOME} component={App} />
+            <Route exact path={ROUTE.HOME} component={App} />
             <Route exact path="/" component={App} />
             {/* <Route path="/werewolf/rule" component={WerewolfRule} />
             <Route path="/werewolf/role" component={WerewolfRole} /> */}
-            <Route path={ROUTES.WEREWOLF_ROOM} component={WerewolfRoom} />
+            <Route path={ROUTE.WEREWOLF_ROOM} component={WerewolfRoom} />
             <Route component={Notfound} />
         </Switch>
     </Router>

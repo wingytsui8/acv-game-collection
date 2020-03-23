@@ -4,8 +4,8 @@ import React from 'react'
 import * as constants from '../../constants/werewolf';
 import { werewolf as werewolfSetting } from '../../constants/game';
 import WerewolfCard from './card';
-import WerewolfStatus from './status';
-import Onlooker from './../onlooker';
+import WerewolfPhase from './phase';
+import Spectator from '../spectator';
 import firebase from './../firebase/firebase';
 
 class WerewolfRooms extends React.Component {
@@ -15,6 +15,7 @@ class WerewolfRooms extends React.Component {
       roomId: this.props.match.params.roomId,
       userId: this.props.match.params.userId,
       myRole: null,
+      me: null,
       room: werewolfSetting.setting // default setting
     }
   }
@@ -33,26 +34,40 @@ class WerewolfRooms extends React.Component {
 
 
   // FIXME: connect to Database
-  // componentDidMount(){
-  //   const roomRef = firebase.database().ref(this.state.roomId);
-  //   roomRef.on('value', (snapshot) => {
-  //     let room = snapshot.val();
-  //     // console.log('['+__filename+']')
-  //     // console.log(snapshot.val())
-  //     this.setState({
-  //       room : room
+  // componentDidMount() {
+  //     const roomRef = firebase.database().ref(this.state.roomId);
+  //     roomRef.on('value', (snapshot) => {
+  //       let room = snapshot.val();
+  //       // console.log('['+__filename+']')
+  //       // console.log(snapshot.val())
+  //       this.setState({
+  //         room : room
+  //       })
   //     })
-  //   })
+  //   this.getMyRole();
   // }
 
   getMyRole() {
     if (this.state.room.players.hasOwnProperty(this.state.userId)) {
-      var myRole = this.state.room.players[this.state.userId].role;
+      console.log('is Player');
       this.setState({
-        myRole: myRole
+        me: {
+          player: true,
+          role: this.state.room.players[this.state.userId]
+        }
       })
+
+    } else if (this.state.room.spectators.hasOwnProperty(this.state.userId)) {
+      console.log('is Spectator');
+      this.setState({
+        me: {
+          player: false,
+          role: {}
+        }
+      })
+
     }
-    // TODO: return error if status != pending
+    // TODO: return error if phase != pending
     // else{
     //   window.alert("Invalid Room ID");
     //   this.props.history.push('/');
@@ -64,7 +79,7 @@ class WerewolfRooms extends React.Component {
     if (this.state.room == null) {
       return
     }
-    var status = this.state.room.status;
+    var phase = this.state.room.phase;
     var players = this.state.room.players;
     var playerCards = [];
 
@@ -74,10 +89,19 @@ class WerewolfRooms extends React.Component {
         let player = players[playerIds[i]];
         let isMe = this.state.userId == player.id;
         console.log("[room] userId: " + this.state.userId + " player.id: " + playerIds[i] + " isMe: " + isMe);
-        playerCards.push(<WerewolfCard status={status} myRole={this.state.myRole} isMe={isMe} isAlive={player.isAlive} selectedBy={player.selectedBy} votes={player.votes} userName={player.name} userRole={player.role} ></WerewolfCard>);
+        playerCards.push(<WerewolfCard phase={phase} myRole={this.state.myRole} isMe={isMe} isAlive={player.isAlive} selectedBy={player.selectedBy} votes={player.votes} username={player.name} userRole={player.role} ></WerewolfCard>);
       }
     };
     return playerCards
+  }
+
+  renderSpectator() {
+
+    if (this.state.room.spectators){
+      return <Spectator spectators={this.state.room.spectators}></Spectator>
+    }else{
+      return <div></div>;
+    }
   }
 
   render() {
@@ -85,7 +109,7 @@ class WerewolfRooms extends React.Component {
 
     var room = this.state.room;
     // console.log(this.state.room.players);
-    // console.log(this.state.userId);
+    console.log(this.state);
 
     console.log("room id: " + this.state.roomId + " user id: " + this.state.userId + " role: " + this.state.myRole);
 
@@ -96,10 +120,10 @@ class WerewolfRooms extends React.Component {
             {this.renderPlayer()}
           </div>
           <div class="text-center col-4">
-            <WerewolfStatus roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfStatus>
+            <WerewolfPhase roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfPhase>
           </div>
         </div>
-        <div><Onlooker></Onlooker></div>
+    <div>{this.renderSpectator()}</div>
       </div>
     )
   }

@@ -1,12 +1,12 @@
-// status.js
+// phase.js
 
 import React, { Component } from 'react';
 import * as constants from '../../constants/werewolf';
-import Timer from './../timer';
+import Timer from '../timer';
 import WerewolfCreateGameForm from './createGameForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class WerewolfStatus extends Component {
+class WerewolfPhase extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,20 +19,20 @@ class WerewolfStatus extends Component {
 
   renderForm(){
     var form = [];
-    switch (this.state.room.status){
-      case constants.statusPending:
+    switch (this.state.room.phase){
+      case constants.phasePending:
         let playerNumber = Object.keys(this.state.room.players).length;
         form.push(<WerewolfCreateGameForm player={playerNumber} config={this.state.room.config} roles={this.state.room.roles}></WerewolfCreateGameForm>);
         break;
-      case constants.statusNight:
+      case constants.phaseNight:
         break;
-      case constants.statusWitch:
+      case constants.phaseWitch:
         break;
-      case constants.statusDiscussion:
+      case constants.phaseDiscussion:
         break;
-      case constants.statusVoting:
+      case constants.phaseVoting:
         break;
-      case constants.statusEnd:
+      case constants.phaseEnd:
         break;
     }
 
@@ -42,28 +42,28 @@ return form;
 
   render() {
     console.log(this.state.room);
-    console.log('status: ' + this.state.room.status);
-    const { status, myRole } = this.props;
+    console.log('phase: ' + this.state.room.phase);
+    const { phase, myRole } = this.props;
 
     var description = '';
-    let statusDescription = constants.status[this.state.room.status];
-    if (statusDescription.description.hasOwnProperty(myRole)){
-      description = statusDescription.description[myRole];
+    let phaseDescription = constants.phase[this.state.room.phase];
+    if (phaseDescription.description.hasOwnProperty(myRole)){
+      description = phaseDescription.description[myRole];
     }else{
-      description = statusDescription.description['others'];
+      description = phaseDescription.description['others'];
     }
 
     var additionalInfo = '';
-    if (this.state.room.status === constants.statusPending){
+    if (this.state.room.phase === constants.phasePending){
       //TODO: add copy button
       additionalInfo = <h3>Room ID: {this.state.roomId}</h3>;
     }else{
-      additionalInfo = <Timer seconds={this.state.room.config.duration[this.state.room.status]}></Timer>;
+      additionalInfo = <Timer seconds={this.state.room.config.duration[this.state.room.phase]}></Timer>;
     }
 
     return (
       <div class="border vh-100" >
-        <h2>{statusDescription['name']}</h2>
+        <h2>{phaseDescription['name']}</h2>
         <h3>{description}</h3>
         {additionalInfo}
         {this.renderForm()}
@@ -73,4 +73,4 @@ return form;
   }
 }
 
-export default WerewolfStatus;
+export default WerewolfPhase;
