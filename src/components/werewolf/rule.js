@@ -10,7 +10,7 @@ class WerewolfRule extends Component {
           <h1>Werewolf - Rule</h1>
           <h3>準備階段 </h3>
           <p>（僅在第一回合執行）</p>
-          <ul class="list-unstyled">
+          <ul className="list-unstyled">
             <li>主持人說：「天黑了，所有人請閉眼」；</li>
             <li>所有玩家閉上眼睛，不可發出聲音；</li>
             <li>主持人說：「小偷醒過來」；此時小偷睜眼執行換牌；</li>
@@ -21,7 +21,7 @@ class WerewolfRule extends Component {
           <p>準備階段結束。</p>
 
           <h3>黑夜階段</h3>
-          <ul class="list-unstyled">
+          <ul className="list-unstyled">
             <li>主持人說：「預言家醒過來」；此時預言家睜眼，指定任意一個玩家，由主持人翻開該玩家的身份給預言家。（即使預言家不在遊戲中都要執行此步驟）；</li>
             <li>主持人說：「預言家閉眼，狼人醒過來」；此時所有狼人玩家開眼確認對方；</li>
             <li>主持人說：「狼人殺人」；狼人開始殺害一個村民，其中不能發出任何聲音。此時小女孩亦可偷偷睜開眼睛確認狼人身份；</li>
@@ -31,7 +31,7 @@ class WerewolfRule extends Component {
             <li>主持人說：「吹笛者閉眼，被迷惑的人醒過來」；被迷惑的人醒過來互相確認，之後閉眼。</li> 
           </ul>
           <h3>白天階段</h3>
-          <ul class="list-unstyled">
+          <ul className="list-unstyled">
             <li>主持人說：「白天到了，所有人睜眼」。主持人指出晚上被殺害的村民，並翻開身份卡退出遊戲不能說任何話；如果遇難者是獵人，則必须反殺另一個玩家；如果死去的是情侶之一則另一個情侶玩家也要翻開自己的身份卡并出局；
 </li>
             <li>其餘玩家可自由討論昨晚的事件並找出狼人的身份；</li>

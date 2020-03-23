@@ -16,16 +16,16 @@ import { Route, NavLink, BrowserRouter as Router, Switch } from 'react-router-do
 
 const routing = (
     <Router>
-        {/* <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav" >
-                    <li class="nav-item p-2">
+        {/* <nav className="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
+            <div className="container-fluid">
+                <ul className="nav navbar-nav" >
+                    <li className="nav-item p-2">
                         <NavLink exact activeClassName="active" to="/">Home</NavLink>
                     </li>
-                    <li class="nav-item p-2">
+                    <li className="nav-item p-2">
                         <NavLink activeClassName="active" to="/werewolf/rule">Rule</NavLink>
                     </li>
-                    <li class="nav-item p-2">
+                    <li className="nav-item p-2">
                         <NavLink activeClassName="active" to="/werewolf/role">Role</NavLink>
                     </li>
                 </ul>

@@ -115,11 +115,11 @@ class WerewolfRooms extends React.Component {
 
     return (
       <div>
-        <div class="row">
-          <div class="card-columns col-8">
+        <div className="row">
+          <div className="card-columns col-8">
             {this.renderPlayer()}
           </div>
-          <div class="text-center col-4">
+          <div className="text-center col-4">
             <WerewolfPhase roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfPhase>
           </div>
         </div>

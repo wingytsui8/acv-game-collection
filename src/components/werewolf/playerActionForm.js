@@ -21,7 +21,7 @@ class WerewolfCreateGameForm extends Component {
         <div><h4>{this.props.player}玩家 Player</h4></div>
         <div>You selected {Player}</div>
         
-        <button type="submit" class="btn btn-primary btn-lg btn-block" disabled={this.disabled}>Confirm</button>
+        <button type="submit" className="btn btn-primary btn-lg btn-block" disabled={this.disabled}>Confirm</button>
       </form>
 
     );

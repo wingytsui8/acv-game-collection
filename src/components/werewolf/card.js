@@ -51,12 +51,12 @@ class WerewolfCard extends Component {
 console.log("[card.js] username: " + username + " style: " + cardStyle);
     return (
       <button class={cardStyle}>
-        <div class="card-header p-2">{constants.roles[userRole]['name']}</div>
-        <div class="card-body p-2">
-          <div class="card-title"><h4>{username}</h4></div>
-            <p class="card-text"><b>{this.props.votes} </b>votes</p>
+        <div className="card-header p-2">{constants.roles[userRole]['name']}</div>
+        <div className="card-body p-2">
+          <div className="card-title"><h4>{username}</h4></div>
+            <p className="card-text"><b>{this.props.votes} </b>votes</p>
         </div>
-        <div class="card-footer text-muted p-1">ABCD</div>
+        <div className="card-footer text-muted p-1">ABCD</div>
       </button>
     );
   }

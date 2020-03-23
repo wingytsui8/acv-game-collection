@@ -62,7 +62,7 @@ return form;
     }
 
     return (
-      <div class="border vh-100" >
+      <div className="border vh-100" >
         <h2>{phaseDescription['name']}</h2>
         <h3>{description}</h3>
         {additionalInfo}

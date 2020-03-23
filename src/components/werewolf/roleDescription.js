@@ -24,9 +24,9 @@ class WerewolfRole extends Component {
     }
 
     return (
-      <table class="table table-striped table-bordered">
+      <table className="table table-striped table-bordered">
         <thead>
-          <tr class="table-primary">
+          <tr className="table-primary">
             <th>角色 Role</th>
             <th>簡介 Description</th>
             <th>隊伍 Team</th>
