@@ -32,7 +32,7 @@ export const werewolf = {
       999 : {
         id : 999,
         name : "9",
-        role : "villager",
+        role : "werewolf",
         isAlive : true,
         select : null,
         selectedBy : null,

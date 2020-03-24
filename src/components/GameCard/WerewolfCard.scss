@@ -1,9 +1,33 @@
 @import "src/constants/colors.scss";
 
+.card-container {
+    padding: 10px;
+}
+
 .card {
     text-align: center;
 }
+
+.card-dead {
+    background: darkgray;
+}
+
+.card-werewolf {
+    box-shadow: 0px 0px 5px 5px map-get($colors, card-werewolf);
+}
+
+.card-prophet {
+    box-shadow: 0px 0px 5px 5px map-get($colors, card-prophet);
+}
   
-.card-border {
-    box-shadow: 0px 0px 3px 3px map-get($colors, card-werewolf);
+.card-guard {
+    box-shadow: 0px 0px 5px 5px map-get($colors, card-guard);
+}
+
+.card-witch {
+    box-shadow: 0px 0px 5px 5px map-get($colors, card-villager);
+}
+
+.card-warning {
+    box-shadow: 0px 0px 5px 5px map-get($colors, card-warning);
 }

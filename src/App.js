@@ -50,7 +50,7 @@ class App extends Component {
     if (this.state.rooms.hasOwnProperty(roomId)) {
       if (this.checkAvailableusername(roomId, username)) {
         if (!spectator) { //player
-          if (this.state.rooms[roomId].phase != constants.initPhase) {
+          if (this.state.rooms[roomId].phase !== constants.initPhase) {
             if (!window.confirm("Game started. Join as an spectator?")) {
               return;
             }

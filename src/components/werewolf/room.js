@@ -9,7 +9,7 @@ import Spectator from '../spectator';
 import firebase from '../firebase/firebase';
 import './Room.scss';
 
-class WerewolfRooms extends React.Component {
+class WerewolfRoom extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -84,11 +84,11 @@ class WerewolfRooms extends React.Component {
     var players = this.state.room.players;
     var playerCards = [];
 
-    if (players != null) {
+    if (players !== null) {
       var playerIds = Object.keys(players);
       for (var i = 0; i < playerIds.length; i++) {
         let player = players[playerIds[i]];
-        let isMe = this.state.userId == player.id;
+        let isMe = this.state.userId === player.id;
         console.log("[room] userId: " + this.state.userId + " player.id: " + playerIds[i] + " isMe: " + isMe);
         playerCards.push(<WerewolfCard phase={phase} myRole={this.state.myRole} isMe={isMe} isAlive={player.isAlive} selectedBy={player.selectedBy} votes={player.votes} username={player.name} userRole={player.role} ></WerewolfCard>);
       }
@@ -129,4 +129,4 @@ class WerewolfRooms extends React.Component {
     )
   }
 }
-export default WerewolfRooms
+export default WerewolfRoom
