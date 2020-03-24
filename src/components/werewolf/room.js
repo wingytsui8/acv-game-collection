@@ -4,7 +4,7 @@ import React from 'react'
 import * as constants from '../../constants/werewolf';
 import { werewolf as werewolfSetting } from '../../constants/game';
 import WerewolfCard from './card';
-import WerewolfPhase from './phase';
+import WerewolfInfo from './info';
 import Spectator from '../spectator';
 import firebase from './../firebase/firebase';
 
@@ -33,7 +33,7 @@ class WerewolfRooms extends React.Component {
   // }
 
 
-  // FIXME: connect to Database
+  // DB: connect to Database
   // componentDidMount() {
   //     const roomRef = firebase.database().ref(this.state.roomId);
   //     roomRef.on('value', (snapshot) => {
@@ -114,13 +114,14 @@ class WerewolfRooms extends React.Component {
     console.log("room id: " + this.state.roomId + " user id: " + this.state.userId + " role: " + this.state.myRole);
 
     return (
+      //TODO: add a small button at the top left corner to display role desc 
       <div>
         <div class="row">
           <div class="card-columns col-8">
             {this.renderPlayer()}
           </div>
           <div class="text-center col-4">
-            <WerewolfPhase roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfPhase>
+            <WerewolfInfo roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfInfo>
           </div>
         </div>
     <div>{this.renderSpectator()}</div>

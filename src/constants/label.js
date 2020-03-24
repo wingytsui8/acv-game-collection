@@ -1,7 +1,6 @@
 // label.js
 export const appName= "ACV Game Collection";
 
-
 export const game= "Game";
 
 export const spectator  = "觀看者 Spectators";

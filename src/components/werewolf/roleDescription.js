@@ -1,43 +1,44 @@
-// role.js
+// roleDescription.js
 
 import React, { Component } from 'react';
-import * as constants from '../../constants/werewolf';
+import * as label from '../../constants/label';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ROLE_LIST from './model/player';
+import TEAM_LIST from './model/team';
 
-class WerewolfRole extends Component {
 
-  roles = constants.roles;  
+class WerewolfRoleDescription extends Component {
+  //TODO: highlight my role
   render() {
-    var roleRow = [];
-    for (var key in this.roles) {
-      var role = this.roles[key];
-      roleRow.push([
+    var row = [];
+    for (var i = 0; i < ROLE_LIST.length; i++) {
+      row.push([
         <tr>
-          <td >{role['name']}</td>
+          <td >{ROLE_LIST[i].name}</td>
           <td>
-            <p>{role['description_zh']}</p>
-            <p>{role['description']}</p>
-            </td>
-          <td>{constants.teams[role['team']]['name']}</td>
+            <p>{ROLE_LIST[i].description.zh}</p>
+            <p>{ROLE_LIST[i].description.en}</p>
+          </td>
+          <td>{TEAM_LIST[ROLE_LIST[i].team].name}</td>
         </tr>
-        ]);
+      ]);
     }
 
     return (
       <table class="table table-striped table-bordered">
         <thead>
           <tr class="table-primary">
-            <th>角色 Role</th>
-            <th>簡介 Description</th>
-            <th>隊伍 Team</th>
+            <th>{label.role}</th>
+            <th>{label.description}</th>
+            <th>{label.team}</th>
           </tr>
         </thead>
-        <tbody>{roleRow}</tbody>
+        <tbody>{row}</tbody>
       </table>
     );
   }
 }
 
-export default WerewolfRole;
+export default WerewolfRoleDescription;
 
 

@@ -232,15 +232,15 @@ class WerewolfCreateGameForm extends Component {
         </div>
         <div><h4>Duration of each session (s)</h4></div>
         <div class="form-group row">
-        <label class="col-4" >{constants.phase.night.name}</label>
+        {/* <label class="col-4" >{constants.phase.night.name}</label> */}
           <input class="col-2" type="number" name="nightDuration" value={this.state.nightDuration} onChange={this.handleChange}></input>
-        <label class="col-4" >{constants.phase.witch.name}</label>
+        {/* <label class="col-4" >{constants.phase.witch.name}</label> */}
           <input class="col-2" type="number" name="witchDuration" value={this.state.witchDuration} onChange={this.handleChange}></input>
         </div>
         <div class="form-group row">
-        <label class="col-4" >{constants.phase.discussion.name}</label>
+        {/* <label class="col-4" >{constants.phase.discussion.name}</label> */}
           <input class="col-2" type="number" name="discussionDuration" value={this.state.discussionDuration} onChange={this.handleChange}></input>
-        <label class="col-4" >{constants.phase.voting.name}</label>
+        {/* <label class="col-4" >{constants.phase.voting.name}</label> */}
           <input class="col-2" type="number" name="votingDuration" value={this.state.votingDuration} onChange={this.handleChange}></input>
         </div>
         <div><h4>Other Setting</h4></div>

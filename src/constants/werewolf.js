@@ -60,71 +60,71 @@ export const roles = {
   },
 }
 
-export const teams = {
-  werewolf: {
-    name: '狼人 Werewolf',
+// export const teams = {
+//   werewolf: {
+//     name: '狼人 Werewolf',
    
-  },
-  villager: {
-    name: '普通村民 Villager',
+//   },
+//   villager: {
+//     name: '普通村民 Villager',
   
-  },
-  solo: {
-    name: '自己 Solo',
+//   },
+//   solo: {
+//     name: '自己 Solo',
   
-  }
-}
+//   }
+// }
 
-export const phase = {
-  pending: {
-    name: '等待玩家 Waiting for player',
-    description: {
-      others : '等待玩家 Waiting for player'
-    },
-    time: 9999,
-    next: 'night',
-  },
-  night: {
-    name: '晚上 At night',
-    description: {
-      werewolf : '狼人開始殺害一個村民',
-      prophet : '查看一位玩家的身份',
-      graud : '守衛一位玩家',
-      others : '訓教 Go to sleep'
-    },
-    time: 60,
-    next: 'witch',
-  },
-  witch: {
-    name: '女巫 Witch',
-    description: {
-      witch : '女巫可選擇是否使用魔法去救人或殺人',
-      others : '女巫 Witch'
-    },
-    time: 60,
-    next: 'discussion',
-  },
-  discussion: {
-    name: '討論 Discussion',
-    description: {
-      others : '討論 Discussion'
-    },
-    time: 60,
-    next: 'voting',
-  },
-  voting: {
-    name: '投票 Voting',
-    description: {
-      others : '投票 Voting'
-    },
-    time: 60,
-    next: 'night',
-  },
-  end: {
-    name: '遊戲完結 End',
-    description: {
-      others : '遊戲完結 End'
-    },
-    time: 9999,
-  }
-}
+// export const phase = {
+//   pending: {
+//     name: '等待玩家 Waiting for player',
+//     description: {
+//       others : '等待玩家 Waiting for player'
+//     },
+//     time: 9999,
+//     next: 'night',
+//   },
+//   night: {
+//     name: '晚上 At night',
+//     description: {
+//       werewolf : '狼人開始殺害一個村民',
+//       prophet : '查看一位玩家的身份',
+//       graud : '守衛一位玩家',
+//       others : '訓教 Go to sleep'
+//     },
+//     time: 60,
+//     next: 'witch',
+//   },
+//   witch: {
+//     name: '女巫 Witch',
+//     description: {
+//       witch : '女巫可選擇是否使用魔法去救人或殺人',
+//       others : '女巫 Witch'
+//     },
+//     time: 60,
+//     next: 'discussion',
+//   },
+//   discussion: {
+//     name: '討論 Discussion',
+//     description: {
+//       others : '討論 Discussion'
+//     },
+//     time: 60,
+//     next: 'voting',
+//   },
+//   voting: {
+//     name: '投票 Voting',
+//     description: {
+//       others : '投票 Voting'
+//     },
+//     time: 60,
+//     next: 'night',
+//   },
+//   end: {
+//     name: '遊戲完結 End',
+//     description: {
+//       others : '遊戲完結 End'
+//     },
+//     time: 9999,
+//   }
+// }

@@ -35,8 +35,8 @@ const routing = (
         <Switch>
             <Route exact path={ROUTE.HOME} component={App} />
             <Route exact path="/" component={App} />
-            {/* <Route path="/werewolf/rule" component={WerewolfRule} />
-            <Route path="/werewolf/role" component={WerewolfRole} /> */}
+            <Route path="/werewolf/rule" component={WerewolfRule} />
+            <Route path="/werewolf/role" component={WerewolfRole} />
             <Route path={ROUTE.WEREWOLF_ROOM} component={WerewolfRoom} />
             <Route component={Notfound} />
         </Switch>
