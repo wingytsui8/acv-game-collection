@@ -29,8 +29,8 @@ class Timer extends Component {
 
   render() {
     return (
-      <div class="p-5">
-        {this.state.seconds > 999 ? <h1 class="text-monospace"> no countdown</h1> :<h1 class="text-danger font-weight-bold display-1 text-monospace"> {this.state.seconds}s</h1>}
+      <div className="p-5">
+        {this.state.seconds > 999 ? <h1 className="text-monospace"> no countdown</h1> :<h1 className="text-danger font-weight-bold display-1 text-monospace"> {this.state.seconds}s</h1>}
 
       </div>
     )

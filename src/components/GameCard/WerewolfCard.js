@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import * as constants from '../../constants/werewolf';
 // import * as role from './role';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card } from "react-bootstrap";
+import './WerewolfCard.scss';
 
 
 class WerewolfCard extends Component {
@@ -48,16 +50,25 @@ class WerewolfCard extends Component {
         break;
     }
 
-console.log("[card.js] username: " + username + " style: " + cardStyle);
+    console.log("[card.js] username: " + username + " style: " + cardStyle);
+
+    //TODO: replace border color
     return (
-      <button class={cardStyle}>
-        <div class="card-header p-2">{constants.roles[userRole]['name']}</div>
-        <div class="card-body p-2">
-          <div class="card-title"><h4>{username}</h4></div>
-            <p class="card-text"><b>{this.props.votes} </b>votes</p>
-        </div>
-        <div class="card-footer text-muted p-1">ABCD</div>
-      </button>
+      <div>
+          <Card className={cardStyle} onClick={() => console.log('click')}>
+            <Card.Header>
+              {constants.roles[userRole]['name']}
+            </Card.Header>
+            {/* <Card.Img src="" alt="Card image" /> */}
+            <Card.Body>
+                <Card.Title>{username}</Card.Title>
+                <Card.Text>
+                    <b>{this.props.votes} </b>votes
+                </Card.Text>
+            </Card.Body>
+            <Card.Footer>ABCD</Card.Footer>
+        </Card>
+      </div>
     );
   }
 }

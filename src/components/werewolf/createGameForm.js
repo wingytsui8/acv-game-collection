@@ -204,31 +204,31 @@ class WerewolfCreateGameForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div><h4>{this.props.player}玩家 Player</h4></div>
-        <div class="form-group row">
-          <label class="col-4" >{this.roles[constants.roleWerewolf]['name']}</label>
-          <input class="col-2" type="number" name={constants.roleWerewolf} value={this.state.werewolf} onChange={this.handleChange} min={1}></input>
-          <label class="col-4" >{this.roles[constants.roleVillager]['name']}</label>
-          <input class="col-2" type="number" name={constants.roleVillager} value={this.state.villager} onChange={this.handleChange} min={1}></input>
+        <div className="form-group row">
+          <label className="col-4" >{this.roles[constants.roleWerewolf]['name']}</label>
+          <input className="col-2" type="number" name={constants.roleWerewolf} value={this.state.werewolf} onChange={this.handleChange} min={1}></input>
+          <label className="col-4" >{this.roles[constants.roleVillager]['name']}</label>
+          <input className="col-2" type="number" name={constants.roleVillager} value={this.state.villager} onChange={this.handleChange} min={1}></input>
         </div>
-        <div class="form-group row">
-          <label class="col-4" >{this.roles[constants.roleProphet]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleProphet} checked={this.state.prophet} onChange={this.handleCheckboxChange} ></input>
-          <label class="col-4" >{this.roles[constants.roleGuard]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleGuard} checked={this.state.guard} onChange={this.handleCheckboxChange} ></input>
+        <div className="form-group row">
+          <label className="col-4" >{this.roles[constants.roleProphet]['name']}</label>
+          <input className="col-2" type="checkbox" name={constants.roleProphet} checked={this.state.prophet} onChange={this.handleCheckboxChange} ></input>
+          <label className="col-4" >{this.roles[constants.roleGuard]['name']}</label>
+          <input className="col-2" type="checkbox" name={constants.roleGuard} checked={this.state.guard} onChange={this.handleCheckboxChange} ></input>
         </div>
-        <div class="form-group row">
-          <label class="col-4" >{this.roles[constants.roleWitch]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleWitch} checked={this.state.witch} onChange={this.handleCheckboxChange} ></input>
-          <label class="col-4" >{this.roles[constants.roleHunter]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleHunter} checked={this.state.hunter} onChange={this.handleCheckboxChange} ></input>
+        <div className="form-group row">
+          <label className="col-4" >{this.roles[constants.roleWitch]['name']}</label>
+          <input className="col-2" type="checkbox" name={constants.roleWitch} checked={this.state.witch} onChange={this.handleCheckboxChange} ></input>
+          <label className="col-4" >{this.roles[constants.roleHunter]['name']}</label>
+          <input className="col-2" type="checkbox" name={constants.roleHunter} checked={this.state.hunter} onChange={this.handleCheckboxChange} ></input>
         </div>
-        <div class="form-group row">
-          <label class="col-4" >{this.roles[constants.roleFool]['name']}</label>
-          <input class="col-2" type="checkbox" name={constants.roleFool} checked={this.state.fool} onChange={this.handleCheckboxChange} ></input>
+        <div className="form-group row">
+          <label className="col-4" >{this.roles[constants.roleFool]['name']}</label>
+          <input className="col-2" type="checkbox" name={constants.roleFool} checked={this.state.fool} onChange={this.handleCheckboxChange} ></input>
         </div>
         <div>
-          <label class="col-6">合共 Total </label>
-          <label class="col-6">{this.state.total}</label>
+          <label className="col-6">合共 Total </label>
+          <label className="col-6">{this.state.total}</label>
         </div>
         <div><h4>Duration of each session (s)</h4></div>
         <div class="form-group row">
@@ -244,11 +244,11 @@ class WerewolfCreateGameForm extends Component {
           <input class="col-2" type="number" name="votingDuration" value={this.state.votingDuration} onChange={this.handleChange}></input>
         </div>
         <div><h4>Other Setting</h4></div>
-        <div class="form-group row">
-        <label class="col-8" >Display player Role after he/she died</label>
-        <input class="col-2" type="checkbox" name="displayRole" checked={this.state.displayRole} onChange={this.handleCheckboxChange}></input>
+        <div className="form-group row">
+        <label className="col-8" >Display player Role after he/she died</label>
+        <input className="col-2" type="checkbox" name="displayRole" checked={this.state.displayRole} onChange={this.handleCheckboxChange}></input>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" disabled={this.disabled}>Confirm</button>
+        <button type="submit" className="btn btn-primary btn-lg btn-block" disabled={this.disabled}>Confirm</button>
       </form>
 
     );

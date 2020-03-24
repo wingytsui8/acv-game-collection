@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import firebase from './components/firebase/firebase';
 import * as constants from './constants/game';
 import * as label from './constants/label';
@@ -143,42 +143,42 @@ class App extends Component {
           <div class="row">
             <div class="col">
               <form onSubmit={this.joinExistingGame}>
-                <div class="form-group row">
-    <label for="roomId" class="col-sm-4 col-form-label col-form-label-lg">{label.roomId}</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control form-control-lg" id="roomId" placeholder="Room ID" required={true} />
+                <div className="form-group row">
+    <label for="roomId" className="col-sm-4 col-form-label col-form-label-lg">{label.roomId}</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control form-control-lg" id="roomId" placeholder="Room ID" required={true} />
                   </div>
                 </div>
-                <div class="form-group row">
-    <label for="username" class="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control form-control-lg" id="username" placeholder="User Name" required={true} />
+                <div className="form-group row">
+    <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control form-control-lg" id="username" placeholder="User Name" required={true} />
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label col-form-label-lg" for="spectator">{label.spectator}?</label>
-                  <div class="col-sm-8">
-                    <input class="form-control form-control-lg" type="checkbox" id="spectator"></input>
+                <div className="form-group row">
+                  <label className="col-sm-4 col-form-label col-form-label-lg" for="spectator">{label.spectator}?</label>
+                  <div className="col-sm-8">
+                    <input className="form-control form-control-lg" type="checkbox" id="spectator"></input>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">{label.button.join}</button>
+                <button type="submit" className="btn btn-primary btn-lg btn-block">{label.button.join}</button>
               </form>
             </div>
-            <div class="col">
+            <div className="col">
               <form onSubmit={this.createNewGame}>
-                <div class="form-group row">
-    <label for="username" class="col-sm-4 col-form-label col-form-label-lg">{label.game}</label>
-                  <select class="custom-select col-sm-8" id="gameSelect">
+                <div className="form-group row">
+    <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.game}</label>
+                  <select className="custom-select col-sm-8" id="gameSelect">
                     {this.getGameOptionList()}
                   </select>
                 </div>
-                <div class="form-group row">
-                  <label for="username" class="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control form-control-lg" id="username" placeholder="User Name" required={true} />
+                <div className="form-group row">
+                  <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control form-control-lg" id="username" placeholder="User Name" required={true} />
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">{label.button.createGame}</button>
+                <button type="submit" className="btn btn-primary btn-lg btn-block">{label.button.createGame}</button>
               </form>
             </div>
           </div>

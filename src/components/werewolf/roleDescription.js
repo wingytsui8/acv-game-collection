@@ -25,7 +25,7 @@ class WerewolfRoleDescription extends Component {
     }
 
     return (
-      <table class="table table-striped table-bordered">
+      <table className="table table-striped table-bordered">
         <thead>
           <tr class="table-primary">
             <th>{label.role}</th>

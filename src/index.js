@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import * as  ROUTE from './constants/route';
 import WerewolfRole from './components/werewolf/roleDescription';
 import WerewolfRule from './components/werewolf/rule';
-import WerewolfRoom from './components/werewolf/room';
+import WerewolfRoom from './components/werewolf/Room';
 import Notfound from './components/notfound'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,16 +16,16 @@ import { Route, NavLink, BrowserRouter as Router, Switch } from 'react-router-do
 
 const routing = (
     <Router>
-        {/* <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav" >
-                    <li class="nav-item p-2">
+        {/* <nav className="navbar navbar-expand-lg navbar-static-top navbar-light bg-light">
+            <div className="container-fluid">
+                <ul className="nav navbar-nav" >
+                    <li className="nav-item p-2">
                         <NavLink exact activeClassName="active" to="/">Home</NavLink>
                     </li>
-                    <li class="nav-item p-2">
+                    <li className="nav-item p-2">
                         <NavLink activeClassName="active" to="/werewolf/rule">Rule</NavLink>
                     </li>
-                    <li class="nav-item p-2">
+                    <li className="nav-item p-2">
                         <NavLink activeClassName="active" to="/werewolf/role">Role</NavLink>
                     </li>
                 </ul>

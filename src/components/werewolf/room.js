@@ -3,10 +3,11 @@
 import React from 'react'
 import * as constants from '../../constants/werewolf';
 import { werewolf as werewolfSetting } from '../../constants/game';
-import WerewolfCard from './card';
 import WerewolfInfo from './info';
+import WerewolfCard from '../GameCard/WerewolfCard';
 import Spectator from '../spectator';
-import firebase from './../firebase/firebase';
+import firebase from '../firebase/firebase';
+import './Room.scss';
 
 class WerewolfRooms extends React.Component {
   constructor(props) {
@@ -116,15 +117,15 @@ class WerewolfRooms extends React.Component {
     return (
       //TODO: add a small button at the top left corner to display role desc 
       <div>
-        <div class="row">
-          <div class="card-columns col-8">
+        <div className="game-room">
+          <div className="card-section card-columns">
             {this.renderPlayer()}
           </div>
-          <div class="text-center col-4">
+          <div className="panel-section text-center">
             <WerewolfInfo roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfInfo>
           </div>
         </div>
-    <div>{this.renderSpectator()}</div>
+        <div>{this.renderSpectator()}</div>
       </div>
     )
   }

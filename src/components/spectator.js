@@ -15,7 +15,7 @@ class Spectator extends Component {
     }
   
     return (
-      <div class="fixed-bottom bg-info text-white">
+      <div className="fixed-bottom bg-info text-white">
         {label.spectator} ({count})： {nameList} 
       </div>
     );
