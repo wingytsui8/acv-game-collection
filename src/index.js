@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as  ROUTE from './constants/route';
-import WerewolfRole from './components/werewolf/roleDescription';
+import WerewolfRole from './components/werewolf/RoleDescription';
 import WerewolfRule from './components/werewolf/rule';
 import WerewolfRoom from './components/werewolf/Room';
 import Notfound from './components/notfound'

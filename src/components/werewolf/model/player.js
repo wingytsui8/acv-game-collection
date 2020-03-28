@@ -1,5 +1,5 @@
-// player.js
-import * as team from './team';
+// Player.js
+import * as team from './Team';
 
 export const ROLE_FOOL = "fool";
 export const ROLE_HUNTER = "hunter";
@@ -9,11 +9,13 @@ export const ROLE_VILLAGER = "villager";
 export const ROLE_WEREWOLF = "werewolf";
 export const ROLE_WITCH = "witch";
 
-
-class Role {
-  constructor() {
+export class Player {
+  constructor(username) {
+    // this.id = id;
+    this.username = username;
+    // this.isMe = false;
     this.role = ROLE_VILLAGER;
-    this.name = '普通村民 Villager';
+    this.roleName = '普通村民 Villager';
     this.description = {
       en: '',
       zh: '',
@@ -38,11 +40,11 @@ class Role {
     //TODO:
   }
 }
-class Villager extends Role {
-  constructor() {
-    super();
+export class Villager extends Player {
+  constructor(username) {
+    super(username);
     this.role = ROLE_VILLAGER;
-    this.name = '普通村民 Villager';
+    this.roleName = '普通村民 Villager';
     this.description = {
       en: '',
       zh: '',
@@ -50,14 +52,15 @@ class Villager extends Role {
     };
     this.team = team.TEAM_VILLAGER;
     this.maxNumber = 10;
+    this.minNumber = 1;
   }
 }
 
-class Werewolf extends Role {
-  constructor() {
-    super();
+export class Werewolf extends Player {
+  constructor(id, username, isMe) {
+    super(id, username, isMe);
     this.role = ROLE_WEREWOLF;
-    this.name = '狼人 Werewolf';
+    this.roleName = '狼人 Werewolf';
     this.description = {
       en: 'Each night, the werewolves pick 1 (this can change with the Personnages expansion pack) player to kill. The victim can be anyone except the Moderator, including other werewolves. The next day, they pretend to be a villager and try to seem unsuspicious. The number of werewolves in a game varies depending on the number of players.',
       zh: '每回合「黑夜」可吞噬一人。狼人可以選擇不吞噬人（空刀）或是吞噬狼人（自刀）。如果狼人團隊無法統一擊殺目標，則無人死亡，形成平安夜。「白天」則可直接暴露身份強制進入黑夜（自爆），或者暴露身份強制帶走任意玩家（明刀）進入下一白天，若該玩家為獵人以外神明則無法發動技能（意即女巫不能投毒、預言家無法查驗）。',
@@ -65,6 +68,7 @@ class Werewolf extends Role {
     };
     this.team = team.TEAM_WEREWOLF;
     this.maxNumber = 10;
+    this.minNumber = 1;
   }
   //
   kill() {
@@ -72,68 +76,72 @@ class Werewolf extends Role {
   }
 }
 
-class Prophet extends Role {
+export class Prophet extends Player {
   constructor() {
     super();
     this.role = ROLE_PROPHET;
-    this.name = '預言家 Prophet';
+    this.roleName = '預言家 Prophet';
     this.description = {
-      en: 'Each night, they can discover the real identity of a player. They must help the other villagers but discretely to not be found by werewolves.',
+      en: 'Each night, they can discover the real identity of a  They must help the other villagers but discretely to not be found by werewolves.',
       zh: '每回合「黑夜」可以查看一位玩家身份（好人或狼人，但查不到准确身份，比如说女巫、猎人等）。',
     };
     this.team = team.TEAM_VILLAGER;
     this.maxNumber = 1;
+    this.minNumber = 0;
   }
   check() {
     //TODO:
   }
 }
 
-class Guard extends Role {
+export class Guard extends Player {
   constructor() {
     super();
     this.role = ROLE_GUARD;
-    this.name = '守衛 Guard';
+    this.roleName = '守衛 Guard';
     this.description = {
       en: '',
       zh: '',
     };
     this.team = team.TEAM_VILLAGER;
     this.maxNumber = 1;
+    this.minNumber = 0;
   }
   protect() {
     //TODO:
   }
 }
 
-class Hunter extends Role {
+export class Hunter extends Player {
   constructor() {
     super();
     this.role = ROLE_HUNTER;
-    this.name = '獵人 Hunter';
+    this.roleName = '獵人 Hunter';
     this.description = {
       en: '',
       zh: '',
     };
     this.team = team.TEAM_VILLAGER;
     this.maxNumber = 1;
+    this.minNumber = 0;
   }
   kill() {
     //TODO:
   }
 }
 
-class Witch extends Role {
+export class Witch extends Player {
   constructor() {
     super();
     this.role = ROLE_WITCH;
-    this.name = '女巫 Witch';
+    this.roleName = '女巫 Witch';
     this.description = {
       en: '',
       zh: '',
     };
     this.team = team.TEAM_VILLAGER;
     this.maxNumber = 1;
+    this.minNumber = 0;
     this.action = {
       poison: 1,
       medicine: 1,
@@ -147,49 +155,22 @@ class Witch extends Role {
   }
 }
 
-class Fool extends Role {
+export class Fool extends Player {
   constructor() {
     super();
     this.role = ROLE_FOOL;
-    this.name = '白痴 Fool';
+    this.roleName = '白痴 Fool';
     this.description = {
       en: '',
       zh: '',
     };
     this.team = team.TEAM_SOLO;
     this.maxNumber = 1;
+    this.minNumber = 0;
   }
 }
 
-// class Player {
-//   constructor(id, username, role) {
-//     this.id = id;
-//     this.username = username;
-//     switch (role) {
-//       case ROLE_FOOL:
-//         this.role = new Fool();
-//         break;
-//       case ROLE_HUNTER:
-//         this.role = new Hunter();
-//         break;
-//       case ROLE_GUARD:
-//         this.role = new Guard();
-//         break;
-//       case ROLE_PROPHET:
-//         this.role = new Prophet();
-//         break;
-//       case ROLE_VILLAGER:
-//         this.role = new Villager();
-//         break;
-//       case ROLE_WEREWOLF:
-//         this.role = new Werewolf();
-//         break;
-//       case ROLE_WITCH:
-//         this.role = new Witch();
-//         break;
-//     }
-//   }
-// }
+
 
 export const ROLE_LIST = [
   new Villager(),
@@ -202,3 +183,124 @@ export const ROLE_LIST = [
 ]
 
 export default ROLE_LIST;
+
+export const SUGGESTED_ROLE = {
+    6: {
+      [ROLE_WEREWOLF]: 2,
+      [ROLE_VILLAGER]: 2,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 0,
+      [ROLE_HUNTER]: 0,
+      [ROLE_FOOL]: 0,
+    },
+    7: {
+      [ROLE_WEREWOLF]: 2,
+      [ROLE_VILLAGER]: 3,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 0,
+      [ROLE_HUNTER]: 0,
+      [ROLE_FOOL]: 0,
+    },
+    8: {
+      [ROLE_WEREWOLF]: 2,
+      [ROLE_VILLAGER]: 3,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 0,
+      [ROLE_FOOL]: 0,
+    },
+    9: {
+      [ROLE_WEREWOLF]: 3,
+      [ROLE_VILLAGER]: 3,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 0,
+      [ROLE_FOOL]: 0,
+    },
+    10: {
+      [ROLE_WEREWOLF]: 3,
+      [ROLE_VILLAGER]: 4,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 0,
+      [ROLE_FOOL]: 0,
+    },
+    11: {
+      [ROLE_WEREWOLF]: 3,
+      [ROLE_VILLAGER]: 4,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 0,
+    },
+    12: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 4,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 0,
+    },
+    13: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 5,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 0,
+    },
+    14: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 5,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 1,
+    },
+    15: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 6,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 1,
+    },
+    16: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 7,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 1,
+    },
+    17: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 8,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 1,
+    },
+    18: {
+      [ROLE_WEREWOLF]: 4,
+      [ROLE_VILLAGER]: 9,
+      [ROLE_PROPHET]: 1,
+      [ROLE_GUARD]: 1,
+      [ROLE_WITCH]: 1,
+      [ROLE_HUNTER]: 1,
+      [ROLE_FOOL]: 1,
+    },
+  
+};

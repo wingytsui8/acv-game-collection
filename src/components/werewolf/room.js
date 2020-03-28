@@ -1,23 +1,29 @@
 // room.js
 
 import React from 'react'
-import * as constants from '../../constants/werewolf';
-import { werewolf as werewolfSetting } from '../../constants/game';
-import WerewolfInfo from './info';
-import WerewolfCard from '../GameCard/WerewolfCard';
-import Spectator from '../spectator';
+import { werewolf as werewolfSetting } from './model/WerewolfGame';
+import WerewolfInfo from './Info';
+import WerewolfCard from './GameCard/WerewolfCard';
+import Spectator from './../model/Spectator';
+import SpectatorSection from '../SpectatorSection';
 import firebase from '../firebase/firebase';
+import * as player from './model/Player';
+
+import WerewolfGame from './model/WerewolfGame';
 import './Room.scss';
+
+// require('./model/player');
 
 class WerewolfRooms extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       roomId: this.props.match.params.roomId,
-      userId: this.props.match.params.userId,
-      myRole: null,
+      playerId: this.props.match.params.playerId,
       me: null,
-      room: werewolfSetting.setting // default setting
+      room: {
+        game: werewolfSetting.setting // default setting
+      }
     }
   }
   // TODO: ask before exit + delete user records
@@ -34,95 +40,83 @@ class WerewolfRooms extends React.Component {
   // }
 
 
-  // DB: connect to Database
-  // componentDidMount() {
-  //     const roomRef = firebase.database().ref(this.state.roomId);
-  //     roomRef.on('value', (snapshot) => {
-  //       let room = snapshot.val();
-  //       // console.log('['+__filename+']')
-  //       // console.log(snapshot.val())
-  //       this.setState({
-  //         room : room
-  //       })
-  //     })
-  //   this.getMyRole();
-  // }
+
+
+  componentDidMount() {
+    // window.addEventListener("beforeunload", this.onUnload);
+    // DB: connect to Database
+    //     const roomRef = firebase.database().ref(this.state.roomId);
+    //     roomRef.on('value', (snapshot) => {
+    //       let room = snapshot.val();
+    //       this.setState({
+    //         room : Object.assign(new WerewolfGame, { game: room }),
+    //       })
+    //     })
+    //   this.getMyRole();
+  }
 
   getMyRole() {
-    if (this.state.room.players.hasOwnProperty(this.state.userId)) {
-      console.log('is Player');
+    console.log(this.state);
+    let game = this.state.room.game;
+    if (game.players.hasOwnProperty(this.state.playerId)) {
       this.setState({
         me: {
           player: true,
-          role: this.state.room.players[this.state.userId]
+          role: Object.assign(new player.Player, game.players[this.state.playerId]),
         }
       })
-
-    } else if (this.state.room.spectators.hasOwnProperty(this.state.userId)) {
-      console.log('is Spectator');
+    } else if (game.spectators.hasOwnProperty(this.state.playerId)) {
       this.setState({
         me: {
           player: false,
-          role: {}
+          role: Object.assign(new Spectator, game.spectators[this.state.playerId]),
         }
       })
-
     }
-    // TODO: return error if phase != pending
-    // else{
-    //   window.alert("Invalid Room ID");
-    //   this.props.history.push('/');
-    // }
-
   }
 
   renderPlayer() {
-    if (this.state.room == null) {
+    if (this.state.room.game == null) {
       return
     }
-    var phase = this.state.room.phase;
-    var players = this.state.room.players;
+    var phase = this.state.room.game.phase;
+    var players = this.state.room.game.players;
     var playerCards = [];
 
     if (players != null) {
       var playerIds = Object.keys(players);
       for (var i = 0; i < playerIds.length; i++) {
         let player = players[playerIds[i]];
-        let isMe = this.state.userId == player.id;
-        console.log("[room] userId: " + this.state.userId + " player.id: " + playerIds[i] + " isMe: " + isMe);
-        playerCards.push(<WerewolfCard phase={phase} myRole={this.state.myRole} isMe={isMe} isAlive={player.isAlive} selectedBy={player.selectedBy} votes={player.votes} username={player.name} userRole={player.role} ></WerewolfCard>);
+        let isMe = this.state.playerId == player.id;
+        console.log("[room] playerId: " + this.state.playerId + " player.id: " + playerIds[i] + " isMe: " + isMe);
+        playerCards.push(<WerewolfCard key={player.id} phase={phase} isMe={isMe} player={player}></WerewolfCard>);
       }
     };
     return playerCards
   }
 
   renderSpectator() {
-
-    if (this.state.room.spectators){
-      return <Spectator spectators={this.state.room.spectators}></Spectator>
-    }else{
+    if (this.state.room.game.spectators) {
+      return <SpectatorSection spectators={this.state.room.game.spectators}></SpectatorSection>
+    } else {
       return <div></div>;
     }
   }
 
   render() {
-    // const { url } = this.props.match;
-
-    var room = this.state.room;
-    // console.log(this.state.room.players);
-    console.log(this.state);
-
-    console.log("room id: " + this.state.roomId + " user id: " + this.state.userId + " role: " + this.state.myRole);
+    // console.log(this.state);
+    console.log("room id: " + this.state.roomId + " user id: " + this.state.playerId + " me: " + this.state.me);
 
     return (
       //TODO: add a small button at the top left corner to display role desc 
+      //TODO: add a small button at the top left corner to exit 
       <div>
         <div className="game-room">
           <div className="card-section card-columns">
             {this.renderPlayer()}
           </div>
           <div className="panel-section text-center">
-            <WerewolfInfo roomId={this.state.roomId} userId={this.state.userId} room={room} myRole={this.state.myRole}></WerewolfInfo>
+            <WerewolfInfo roomId={this.state.roomId} playerId={this.state.playerId} room={this.state.room} me={this.state.me}></WerewolfInfo>
           </div>
         </div>
         <div>{this.renderSpectator()}</div>

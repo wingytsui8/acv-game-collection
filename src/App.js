@@ -3,7 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import firebase from './components/firebase/firebase';
 import * as constants from './constants/game';
+import {JOIN_EXISTING_GAME} from './constants/message';
 import * as label from './constants/label';
+
+import WerewolfGame from './components/werewolf/model/WerewolfGame';
 
 class App extends Component {
   constructor(props) {
@@ -13,9 +16,7 @@ class App extends Component {
     }
   }
 
-  database = firebase.database();
-
-  // DB: Connect database
+  // DB: Connect database - Read
   // componentDidMount() {
   //   const roomsRef = firebase.database().ref('/');
   //   roomsRef.on('value', (snapshot) => {
@@ -26,66 +27,58 @@ class App extends Component {
   //   })
   // }
 
-  generateUserId() {
-    var userId = 10000000000 + Math.floor(Math.random() * (100000000000));
-    return userId;
-  }
-
-  //TODO: username checking -> no special char && do not longer than 10 char
   createNewGame = (event) => {
-    let roomId = 100000 + Math.floor(Math.random() * (1000000));
-    let userId = this.generateUserId();
     let username = event.target.username.value;
-   //DB:
-    // this.createNewRoomToFirebase(roomId, userId, username, "villager"); 
-    this.props.history.push('/werewolf/room/' + roomId + '/' + userId);
+    //TODO: username checking -> no special char && do not longer than 10 char
+    var werewolfGame = new WerewolfGame();
+    let playerId = werewolfGame.createGame(username);
+
+    this.props.history.push('/werewolf/room/' + werewolfGame.game.roomId + '/' + playerId);
   }
 
   joinExistingGame = (event) => {
-    // console.log("[joinExistingGame] Room id: " + event.target.roomId.value + " User Name: " + event.target.username.value)
     let roomId = event.target.roomId.value;
-    let userId = this.generateUserId()
     let username = event.target.username.value;
     var spectator = event.target.spectator.checked;
+    // console.log("[joinExistingGame] Room id: " + roomId + " User Name: " + username)
+
     if (this.state.rooms.hasOwnProperty(roomId)) {
-      if (this.checkAvailableusername(roomId, username)) {
+      if (this.checkAvailableUsername(roomId, username)) {
         if (!spectator) { //player
           if (this.state.rooms[roomId].phase != constants.initPhase) {
-            if (!window.confirm("Game started. Join as an spectator?")) {
+            if (!window.confirm(JOIN_EXISTING_GAME.PHASE.INVALID)) {
               return;
             }
-          }else{
-            // window.alert("create a new player. userId: " + userId + ' username: ' + username);
-            //DB:
-            // this.createNewPlayerToFirebase(roomId, userId, username, "villager");
-            this.props.history.push('/werewolf/room/' + roomId + '/' + userId);
+          } else {
+            var werewolfGame = Object.assign(new WerewolfGame, { game: this.state.rooms[roomId] });
+            let playerId = werewolfGame.addPlayer(username);
+            this.props.history.push('/werewolf/room/' + roomId + '/' + playerId);
             return
           }
         }
-        // window.alert("create a new spectator. userId: " + userId + ' username: ' + username);
-        //DB:
-        // this.createNewSpectatorToFirebase(roomId, userId, username);
-        this.props.history.push('/werewolf/room/' + roomId + '/' + userId);
-      }else{
-        window.alert("User name '" + username + "' has been used. Please use another one. ");
+        var werewolfGame = Object.assign(new WerewolfGame, { game: this.state.rooms[roomId] });
+        let playerId = werewolfGame.addSpectator(username);
+        this.props.history.push('/werewolf/room/' + roomId + '/' + playerId);
+      } else {
+        window.alert(JOIN_EXISTING_GAME.USERNAME.DUPLICATED);
       }
     } else {
-      window.alert("Invalid Room ID");
+      window.alert(JOIN_EXISTING_GAME.ROOM_ID.INVALID);
     }
   }
 
-  checkAvailableusername(roomId, username) {
+  checkAvailableUsername(roomId, username) {
     var available = true;
     Object.entries(this.state.rooms[roomId].players).map(([key, player]) => {
-      // window.alert("checkAvailableusername | player name: " +player.name);
-      if (username === player.name) {
+      // window.alert("checkAvailableUsername | player name: " + player.username);
+      if (username === player.username) {
         available = false;
       }
     })
-    if (this.state.rooms[roomId].hasOwnProperty("spectators")){
+    if (this.state.rooms[roomId].hasOwnProperty("spectators")) {
       Object.entries(this.state.rooms[roomId].spectators).map(([key, player]) => {
-        // window.alert("checkAvailableusername | spectator name: " +player.name);
-        if (username === player.name) {
+        // window.alert("checkAvailableUsername | spectator name: " + player.username);
+        if (username === player.username) {
           available = false;
         }
       })
@@ -93,44 +86,10 @@ class App extends Component {
     return available;
   }
 
-  // Call firebase database
-  createNewRoomToFirebase(roomId, userId, username, role) {
-    let roomRef = this.database.ref('/' + roomId);
-    roomRef.child('game').set(constants.werewolf.setting.game);
-    roomRef.child('config').set(constants.werewolf.setting.config);
-    roomRef.child('phase').set(constants.werewolf.setting.phase);
-    this.createNewPlayerToFirebase(roomId, userId, username, role);
-  }
-
-  createNewPlayerToFirebase(roomId, userId, username, role) {
-    let roomRef = this.database.ref('/' + roomId + '/players');
-    var player = {
-      id: userId,
-      name: username,
-      role: role,
-      isAlive: true,
-      select: null,
-      selectedBy: null,
-      votes: 0,
-    };
-    roomRef.child(userId).set(player);
-  }
-
-  createNewSpectatorToFirebase(roomId, userId, username) {
-    window.alert('createNewSpectator');
-      let roomRef = this.database.ref('/' + roomId + '/spectators');
-      var spectator = {
-        id: userId,
-        name: username,
-      };
-      roomRef.child(userId).set(spectator);
-  }
-
-  //
   getGameOptionList() {
     var optionList = []
-    for (const game in constants.games) {
-      optionList.push(<option value={game} selected>{constants.games[game]}</option>)
+    for (const game in constants.GAME_LIST) {
+      optionList.push(<option value={game} selected>{constants.GAME_LIST[game]}</option>)
     }
     return optionList;
   }
@@ -138,19 +97,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 class="text-center p-5">Welcome {label.appName}</h1>
-        <div class="container">
-          <div class="row">
-            <div class="col">
+        <h1 className="text-center p-5">{label.appName}</h1>
+        <div className="container">
+          <div className="row">
+            <div className="col">
               <form onSubmit={this.joinExistingGame}>
                 <div className="form-group row">
-    <label for="roomId" className="col-sm-4 col-form-label col-form-label-lg">{label.roomId}</label>
+                  <label for="roomId" className="col-sm-4 col-form-label col-form-label-lg">{label.roomId}</label>
                   <div className="col-sm-8">
                     <input type="text" className="form-control form-control-lg" id="roomId" placeholder="Room ID" required={true} />
                   </div>
                 </div>
                 <div className="form-group row">
-    <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
+                  <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.username}</label>
                   <div className="col-sm-8">
                     <input type="text" className="form-control form-control-lg" id="username" placeholder="User Name" required={true} />
                   </div>
@@ -167,7 +126,7 @@ class App extends Component {
             <div className="col">
               <form onSubmit={this.createNewGame}>
                 <div className="form-group row">
-    <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.game}</label>
+                  <label for="username" className="col-sm-4 col-form-label col-form-label-lg">{label.game}</label>
                   <select className="custom-select col-sm-8" id="gameSelect">
                     {this.getGameOptionList()}
                   </select>

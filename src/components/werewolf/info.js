@@ -1,9 +1,9 @@
 // info.js
 
 import React, { Component } from 'react';
-import * as phase from './model/phase';
+import * as phase from './model/Phase';
 import Timer from '../timer';
-import WerewolfCreateGameForm from './createGameForm';
+import WerewolfCreateGameForm from './CreateGameForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class WerewolfInfo extends Component {
@@ -11,18 +11,18 @@ class WerewolfInfo extends Component {
     super(props)
     this.state = {
       roomId: this.props.roomId,
-      userId: this.props.userId,
-      myRole: this.props.myRole,
+      playerId: this.props.playerId,
+      me: this.props.me,
       room: this.props.room,
     }
   }
 
-  renderForm(){
+  renderForm(game){
     var form = [];
-    switch (this.state.room.phase){
+    switch (game.phase){
       case phase.PHASE_PENDING:
-        let playerNumber = Object.keys(this.state.room.players).length;
-        form.push(<WerewolfCreateGameForm player={playerNumber} config={this.state.room.config} roles={this.state.room.roles}></WerewolfCreateGameForm>);
+        let playerNumber = Object.keys(game.players).length;
+        form.push(<WerewolfCreateGameForm playerNumber={playerNumber} config={game.config} roles={game.roles}></WerewolfCreateGameForm>);
         break;
       case phase.PHASE_NIGHT:
         break;
@@ -36,14 +36,13 @@ class WerewolfInfo extends Component {
         break;
     }
 
-
 return form;
   }
 
   render() {
     console.log(this.state.room);
     console.log('phase: ' + this.state.room.phase);
-    // const { phase, myRole } = this.props;
+    var game = this.state.room.game;
 
     var description = '';
     // let phaseDescription = constants.phase[this.state.room.phase];
@@ -54,20 +53,19 @@ return form;
     // }
 
     var additionalInfo = '';
-    console.log(phase);
-    if (this.state.room.phase === phase.PHASE_PENDING){
+    if (game.phase === phase.PHASE_PENDING){
       //TODO: add copy button
       additionalInfo = <h3>Room ID: {this.state.roomId}</h3>;
     }else{
-      additionalInfo = <Timer seconds={this.state.room.config.duration[this.state.room.phase]}></Timer>;
+      additionalInfo = <Timer seconds={game.config.duration[game.phase]}></Timer>;
     }
 
     return (
-      <div class="border vh-100" >
+      <div className="border vh-100" >
         {/* <h2>{phaseDescription['name']}</h2> */}
         <h3>{description}</h3>
         {additionalInfo}
-        {this.renderForm()}
+        {this.renderForm(game)}
         <div></div>
       </div>
     );

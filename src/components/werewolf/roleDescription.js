@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import * as label from '../../constants/label';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ROLE_LIST from './model/player';
-import TEAM_LIST from './model/team';
+import ROLE_LIST from './model/Player';
+import TEAM_LIST from './model/Team';
 
 
 class WerewolfRoleDescription extends Component {
@@ -27,7 +27,7 @@ class WerewolfRoleDescription extends Component {
     return (
       <table className="table table-striped table-bordered">
         <thead>
-          <tr class="table-primary">
+          <tr className="table-primary">
             <th>{label.role}</th>
             <th>{label.description}</th>
             <th>{label.team}</th>

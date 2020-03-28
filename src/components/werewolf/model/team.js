@@ -1,4 +1,4 @@
-// teams.js
+// Teams.js
 export const TEAM_SOLO = "solo";
 export const TEAM_VILLAGER = "villager";
 export const TEAM_WEREWOLF = "werewolf";
@@ -14,7 +14,7 @@ export const TEAM_LIST = {
     name: '自己 Solo',
   }
 }
-class TEAM {
+export class TEAM {
   constructor(team) {
     this.name = TEAM_LIST[team].name;
     this.memberNumber = 0;
