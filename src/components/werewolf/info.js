@@ -1,7 +1,7 @@
 // info.js
 
 import React, { Component } from 'react';
-import * as phase from './model/Phase';
+import * as phaseModel from './model/Phase';
 import Timer from '../timer';
 import WerewolfCreateGameForm from './CreateGameForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,54 +17,74 @@ class WerewolfInfo extends Component {
     }
   }
 
-  renderForm(game){
+  renderForm(game) {
     var form = [];
-    switch (game.phase){
-      case phase.PHASE_PENDING:
+    switch (game.phase) {
+      case phaseModel.PHASE_PENDING:
         let playerNumber = Object.keys(game.players).length;
-        form.push(<WerewolfCreateGameForm playerNumber={playerNumber} config={game.config} roles={game.roles}></WerewolfCreateGameForm>);
+        form.push(<WerewolfCreateGameForm playerNumber={playerNumber} config={game.config} roles={game.roles} room={this.state.room}></WerewolfCreateGameForm>);
         break;
-      case phase.PHASE_NIGHT:
+      case phaseModel.PHASE_NIGHT:
         break;
-      case phase.PHASE_WITCH:
+      case phaseModel.PHASE_WITCH:
         break;
-      case phase.PHASE_DISCUSSION:
+      case phaseModel.PHASE_DISCUSSION:
         break;
-      case phase.PHASE_VOTING:
+      case phaseModel.PHASE_VOTING:
         break;
-      case phase.PHASE_END:
+      case phaseModel.PHASE_END:
+        break;
+      default:
         break;
     }
 
-return form;
+    return form;
+  }
+
+  renderPhaseDescription(phase, phaseDuration, me) {
+    var description = [];
+    description.push(phaseModel.PHASE[phase].name);
+    if (me) {
+      if (phaseModel.PHASE[phase].description.hasOwnProperty(me.role)) {
+        description.push(phaseModel.PHASE[phase].description[me.role]);
+      } else {
+        description.push(phaseModel.PHASE[phase].description['others']);
+      }
+    }
+
+    var additionalInfo = '';
+    switch (phase) {
+      case phaseModel.PHASE_PENDING:
+        //TODO: add copy button
+        additionalInfo = <h3>Room ID: {this.state.roomId}</h3>;
+        break;
+      case phaseModel.PHASE_NIGHT:
+      case phaseModel.PHASE_WITCH:
+      case phaseModel.PHASE_DISCUSSION:
+      case phaseModel.PHASE_VOTING:
+        additionalInfo = <Timer seconds={phaseDuration[phase]}></Timer>;
+        break
+      case phaseModel.PHASE_END:
+        additionalInfo = '';
+        break;
+      default:
+        additionalInfo = '';
+        break;
+    }
+    description.push(additionalInfo);
+
+    return description;
   }
 
   render() {
-    console.log(this.state.room);
-    console.log('phase: ' + this.state.room.phase);
+
     var game = this.state.room.game;
-
-    var description = '';
-    // let phaseDescription = constants.phase[this.state.room.phase];
-    // if (phaseDescription.description.hasOwnProperty(myRole)){
-    //   description = phaseDescription.description[myRole];
-    // }else{
-    //   description = phaseDescription.description['others'];
-    // }
-
-    var additionalInfo = '';
-    if (game.phase === phase.PHASE_PENDING){
-      //TODO: add copy button
-      additionalInfo = <h3>Room ID: {this.state.roomId}</h3>;
-    }else{
-      additionalInfo = <Timer seconds={game.config.duration[game.phase]}></Timer>;
-    }
+    console.log(game);
+    console.log('[Info - render] phase: ' + game.phase);
 
     return (
       <div className="border vh-100" >
-        {/* <h2>{phaseDescription['name']}</h2> */}
-        <h3>{description}</h3>
-        {additionalInfo}
+        <h3>{this.renderPhaseDescription(game.phase, game.phaseDuration, game.players[this.state.playerId])}</h3>
         {this.renderForm(game)}
         <div></div>
       </div>

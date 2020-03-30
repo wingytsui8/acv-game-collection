@@ -11,6 +11,7 @@ class SpectatorSection extends Component {
       Object.entries(this.props.spectators).map(([key, spectator]) => {
           nameList += spectator.username + ', '
           count ++;
+          return true;
       });
     }
   

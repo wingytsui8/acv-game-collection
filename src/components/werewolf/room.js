@@ -22,7 +22,7 @@ class WerewolfRooms extends React.Component {
       playerId: this.props.match.params.playerId,
       me: null,
       room: {
-        game: werewolfSetting.setting // default setting
+        game: ''// default setting
       }
     }
   }
@@ -45,31 +45,36 @@ class WerewolfRooms extends React.Component {
   componentDidMount() {
     // window.addEventListener("beforeunload", this.onUnload);
     // DB: connect to Database
-    //     const roomRef = firebase.database().ref(this.state.roomId);
-    //     roomRef.on('value', (snapshot) => {
-    //       let room = snapshot.val();
-    //       this.setState({
-    //         room : Object.assign(new WerewolfGame, { game: room }),
-    //       })
-    //     })
-    //   this.getMyRole();
+        const roomRef = firebase.database().ref(this.state.roomId);
+        roomRef.on('value', (snapshot) => {
+          let room = snapshot.val();
+          this.setState({
+            room : Object.assign(new WerewolfGame, { game: room }),
+          })
+        })
+      this.getMyRole();
+      this.render();
+      this.forceUpdate()
   }
 
   getMyRole() {
     console.log(this.state);
+    if (!this.state.room.game){
+      return;
+    }
     let game = this.state.room.game;
     if (game.players.hasOwnProperty(this.state.playerId)) {
       this.setState({
         me: {
           player: true,
-          role: Object.assign(new player.Player, game.players[this.state.playerId]),
+          role: Object.assign(new player.Player(), game.players[this.state.playerId]),
         }
       })
     } else if (game.spectators.hasOwnProperty(this.state.playerId)) {
       this.setState({
         me: {
           player: false,
-          role: Object.assign(new Spectator, game.spectators[this.state.playerId]),
+          role: Object.assign(new Spectator(), game.spectators[this.state.playerId]),
         }
       })
     }
@@ -102,6 +107,13 @@ class WerewolfRooms extends React.Component {
       return <div></div>;
     }
   }
+  renderInfo() {
+    if (this.state.room.game) {
+      return <WerewolfInfo roomId={this.state.roomId} playerId={this.state.playerId} room={this.state.room} me={this.state.me}></WerewolfInfo>
+    } else {
+      return <div></div>;
+    }
+  }
 
   render() {
     // console.log(this.state);
@@ -116,7 +128,7 @@ class WerewolfRooms extends React.Component {
             {this.renderPlayer()}
           </div>
           <div className="panel-section text-center">
-            <WerewolfInfo roomId={this.state.roomId} playerId={this.state.playerId} room={this.state.room} me={this.state.me}></WerewolfInfo>
+            {this.renderInfo()}
           </div>
         </div>
         <div>{this.renderSpectator()}</div>

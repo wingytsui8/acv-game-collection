@@ -41,8 +41,9 @@ export class Player {
   }
 }
 export class Villager extends Player {
-  constructor(username) {
+  constructor(id, username) {
     super(username);
+    this.id = id;
     this.role = ROLE_VILLAGER;
     this.roleName = '普通村民 Villager';
     this.description = {
@@ -57,8 +58,9 @@ export class Villager extends Player {
 }
 
 export class Werewolf extends Player {
-  constructor(id, username, isMe) {
-    super(id, username, isMe);
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_WEREWOLF;
     this.roleName = '狼人 Werewolf';
     this.description = {
@@ -77,8 +79,9 @@ export class Werewolf extends Player {
 }
 
 export class Prophet extends Player {
-  constructor() {
-    super();
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_PROPHET;
     this.roleName = '預言家 Prophet';
     this.description = {
@@ -95,8 +98,9 @@ export class Prophet extends Player {
 }
 
 export class Guard extends Player {
-  constructor() {
-    super();
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_GUARD;
     this.roleName = '守衛 Guard';
     this.description = {
@@ -113,8 +117,9 @@ export class Guard extends Player {
 }
 
 export class Hunter extends Player {
-  constructor() {
-    super();
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_HUNTER;
     this.roleName = '獵人 Hunter';
     this.description = {
@@ -131,8 +136,9 @@ export class Hunter extends Player {
 }
 
 export class Witch extends Player {
-  constructor() {
-    super();
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_WITCH;
     this.roleName = '女巫 Witch';
     this.description = {
@@ -156,8 +162,9 @@ export class Witch extends Player {
 }
 
 export class Fool extends Player {
-  constructor() {
-    super();
+  constructor(id, username) {
+    super(username);
+    this.id = id;
     this.role = ROLE_FOOL;
     this.roleName = '白痴 Fool';
     this.description = {

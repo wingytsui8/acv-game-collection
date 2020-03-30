@@ -6,12 +6,14 @@ import SETTING from './model/Setting';
 import * as player from './model/Player';
 import * as phase from './model/Phase';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import WerewolfGame from './model/WerewolfGame';
 
 
 class WerewolfCreateGameForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      room : this.props.room,
       //roles
       //TODO: customization of role number
       // [ROLE_WEREWOLF]: this.props.role.werewolf,
@@ -36,26 +38,29 @@ class WerewolfCreateGameForm extends Component {
   }
 
   handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-    // this.calculateTotal();
-    console.log("[" + __filename + "]");
-    console.log(value);
-    console.log(this.state);
+    // const { name, value } = event.target;
+    // this.setState({
+    //   [name]: value
+    // });
+    // // this.calculateTotal();
+    // console.log("[" + __filename + "]");
+    // console.log(value);
+    // console.log(this.state);
   }
   handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    this.calculateTotal();
-    this.setState({ [name]: checked ? 1 : 0 });
-
+    // const { name, checked } = event.target;
+    // this.calculateTotal();
+    // this.setState({ [name]: checked ? 1 : 0 });
   }
   //TODO: assign role and start game
   onSubmit = () => {
     // this.calculateTotal();
-    console.log('[' + __filename + ']total:' + this.state.total);
+    // console.log('[' + __filename + ']total:' + this.state.total);
     console.log(this.state);
+    var game = Object.assign(new WerewolfGame(), this.state.room);
+    console.log(game);
+    game.assignRole();
+    game.updatePhase(phase.PHASE_NIGHT);
   }
 
   // FIXME: there is time delay

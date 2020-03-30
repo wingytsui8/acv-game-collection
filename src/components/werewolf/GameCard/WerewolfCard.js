@@ -13,7 +13,7 @@ class WerewolfCard extends Component {
 
   render() {
     const { phase, isMe, myRole } = this.props;
-    let player = Object.assign(new playerConstant.Player, this.props.player)
+    let player = Object.assign(new playerConstant.Player(), this.props.player)
     console.log(player);
     var cardStyle = "card mb-3 ";
 
@@ -50,6 +50,8 @@ class WerewolfCard extends Component {
         if (myRole === playerConstant.ROLE_WITCH && player.selectedBy === playerConstant.ROLE_WEREWOLF){
           cardStyle += "border-warning ";
         }
+        break;
+      default:
         break;
     }
 

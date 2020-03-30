@@ -17,15 +17,15 @@ class App extends Component {
   }
 
   // DB: Connect database - Read
-  // componentDidMount() {
-  //   const roomsRef = firebase.database().ref('/');
-  //   roomsRef.on('value', (snapshot) => {
-  //     let rooms = snapshot.val();
-  //     this.setState({
-  //       rooms: rooms
-  //     })
-  //   })
-  // }
+  componentDidMount() {
+    const roomsRef = firebase.database().ref('/');
+    roomsRef.on('value', (snapshot) => {
+      let rooms = snapshot.val();
+      this.setState({
+        rooms: rooms
+      })
+    })
+  }
 
   createNewGame = (event) => {
     let username = event.target.username.value;
@@ -44,19 +44,18 @@ class App extends Component {
 
     if (this.state.rooms.hasOwnProperty(roomId)) {
       if (this.checkAvailableUsername(roomId, username)) {
+        var werewolfGame = Object.assign(new WerewolfGame(), { game: this.state.rooms[roomId] });
         if (!spectator) { //player
-          if (this.state.rooms[roomId].phase != constants.initPhase) {
+          if (this.state.rooms[roomId].phase !== constants.initPhase) {
             if (!window.confirm(JOIN_EXISTING_GAME.PHASE.INVALID)) {
               return;
             }
           } else {
-            var werewolfGame = Object.assign(new WerewolfGame, { game: this.state.rooms[roomId] });
             let playerId = werewolfGame.addPlayer(username);
             this.props.history.push('/werewolf/room/' + roomId + '/' + playerId);
             return
           }
         }
-        var werewolfGame = Object.assign(new WerewolfGame, { game: this.state.rooms[roomId] });
         let playerId = werewolfGame.addSpectator(username);
         this.props.history.push('/werewolf/room/' + roomId + '/' + playerId);
       } else {
@@ -73,14 +72,18 @@ class App extends Component {
       // window.alert("checkAvailableUsername | player name: " + player.username);
       if (username === player.username) {
         available = false;
+        return false;
       }
+      return true;
     })
     if (this.state.rooms[roomId].hasOwnProperty("spectators")) {
       Object.entries(this.state.rooms[roomId].spectators).map(([key, player]) => {
         // window.alert("checkAvailableUsername | spectator name: " + player.username);
         if (username === player.username) {
           available = false;
+          return false;
         }
+        return true;
       })
     }
     return available;

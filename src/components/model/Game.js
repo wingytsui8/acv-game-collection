@@ -1,10 +1,12 @@
 // Game.js
 import firebase from '../firebase/firebase';
 import Spectator from './Spectator';
+import { player } from '../../constants/label';
 
 const PATH_ROOT = '/';
 const PATH_PLAYERS = '/players';
 const PATH_SPECTATORS = '/spectators';
+const PATH_PHASE = '/phase';
 
 const ROOM_ID_DIGIT = '6';
 const PLAYER_ID_DIGIT = '10';
@@ -63,7 +65,18 @@ class Game {
   removeSpectator(){
 
   }
-  
+
+  updatePlayer(player){
+    console.log('[Game - updatePlayer] player:' + player.id);
+    var roomRef = this.database.ref(PATH_ROOT + this.game.roomId + PATH_PLAYERS);
+    roomRef.child(player.id).set(player);
+  }
+
+  updatePhase(phase){
+    console.log('[Game - updatePhase] phase:' + phase);
+    var roomRef = this.database.ref(PATH_ROOT + this.game.roomId + PATH_PHASE);
+    roomRef.set(phase);
+  }
 }
 
 export default Game;

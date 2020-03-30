@@ -10,13 +10,21 @@ export const PHASE_END = "end";
 export const ROUND_LIST = [PHASE_NIGHT, PHASE_WITCH, PHASE_DISCUSSION, PHASE_VOTING];
 export const PHASE_LIST = [PHASE_PENDING, PHASE_NIGHT, PHASE_WITCH, PHASE_DISCUSSION, PHASE_VOTING, PHASE_END];
 
+export const DURATION_DISABLE = 9999;
+export const DEFAULT_DURATION = {
+  [PHASE_NIGHT] : 60,
+  [PHASE_WITCH] : 60,
+  [PHASE_DISCUSSION] : 60,
+  [PHASE_VOTING] : 60,
+};
+
 export const PHASE = {
   [PHASE_PENDING] : {
     name : '等待玩家 Waiting for player',
     description : {
       others : '等待玩家 Waiting for player'
     }, 
-    duration : 9999,
+    duration : DURATION_DISABLE,
     nextPhase : PHASE_NIGHT
   },
   [PHASE_NIGHT] : {
@@ -27,7 +35,7 @@ export const PHASE = {
       [player.ROLE_GUARD] : '守衛一位玩家',
       others : '訓教 Go to sleep'
     }, 
-    duration : 60,
+    duration : DEFAULT_DURATION[PHASE_NIGHT],
     nextPhase : PHASE_WITCH
   },
   [PHASE_WITCH] : {
@@ -36,7 +44,7 @@ export const PHASE = {
       [player.ROLE_WITCH] : '女巫可選擇是否使用魔法去救人或殺人',
       others : '訓教 Go to sleep'
     }, 
-    duration : 60,
+    duration : DEFAULT_DURATION[PHASE_WITCH],
     nextPhase : PHASE_DISCUSSION
   },
   [PHASE_DISCUSSION] : {
@@ -44,7 +52,7 @@ export const PHASE = {
     description : {
       others :  '討論 Discussion'
     }, 
-    duration : 60,
+    duration : DEFAULT_DURATION[PHASE_DISCUSSION],
     nextPhase : PHASE_VOTING
   },
   [PHASE_VOTING] : {
@@ -52,7 +60,7 @@ export const PHASE = {
     description : {
       others : '投票 Voting'
     }, 
-    duration : 60,
+    duration : DEFAULT_DURATION[PHASE_VOTING],
     nextPhase : PHASE_END
   },
   [PHASE_END] : {
@@ -60,7 +68,7 @@ export const PHASE = {
     description : {
       others : '遊戲完結 End'
     }, 
-    duration : 9999,
+    duration : DURATION_DISABLE,
     nextPhase : PHASE_PENDING
   }
 }
